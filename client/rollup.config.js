@@ -5,6 +5,10 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
 import sveltePreprocess from 'svelte-preprocess';
+import replace from '@rollup/plugin-replace';
+import { config as configDotenv } from 'dotenv';
+
+configDotenv();
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -75,7 +79,12 @@ export default {
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
-		production && terser()
+		production && terser(),
+
+		replace({
+			'process.env.isProd': production,
+			'process.env.API_URL': process.env.API_URL ? process.env.API_URL : "http://localhost:3000"
+		}),
 	],
 	watch: {
 		clearScreen: false

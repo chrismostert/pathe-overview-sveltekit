@@ -10,7 +10,7 @@
   onMount(async () => {
     moviesLoaded = false;
     // Fetch data
-    const res = await fetch("http://localhost:3000/movies?cinema=18");
+    const res = await fetch("process.env.API_URL/movies?cinema=18");
     let moviesJson = await res.json();
 
     // Is playing in selected cinema?
