@@ -5,27 +5,34 @@ const Levenshtein = require("fast-levenshtein")
 module.exports = getAllMovieInfo
 
 async function getAllMovieInfo(cinemaId) {
-    const mainLink = "https://www.pathe.nl/films/actueel?page="
-    const movieBase = "https://www.pathe.nl"
+    let cacheKey = `getAllMovieInfo_${cinemaId}`
+    let cached = module.parent.cache.get(cacheKey)
+    if (cached == undefined) {
+        const mainLink = "https://www.pathe.nl/films/actueel?page="
+        const movieBase = "https://www.pathe.nl"
 
-    let pageNum = 1
-    let movies = []
+        let pageNum = 1
+        let movies = []
 
-    while (true) {
-        const html = await axios.get(mainLink + pageNum).then(res => res.data)
-        const $ = cheerio.load(html)
-        let posters = $('.poster')
+        while (true) {
+            const html = await axios.get(mainLink + pageNum).then(res => res.data)
+            const $ = cheerio.load(html)
+            let posters = $('.poster')
 
-        if (posters.length == 0) break
+            if (posters.length == 0) break
 
-        posters.each((_, elem) => {
-            movies.push(getMovieInfo(movieBase + elem.attribs['href'], cinemaId))
-        })
+            posters.each((_, elem) => {
+                movies.push(getMovieInfo(movieBase + elem.attribs['href'], cinemaId))
+            })
 
-        pageNum += 1
+            pageNum += 1
+        }
+
+        let result = await Promise.all(movies)
+        module.parent.cache.set(cacheKey, result)
+        return result
     }
-
-    return Promise.all(movies)
+    return cached
 }
 
 async function getMovieInfo(link, cinemaId) {
