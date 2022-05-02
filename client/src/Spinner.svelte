@@ -1,4 +1,14 @@
-<div class="text-center">
-    <img src="popcorn.gif" alt="loader" class="mx-auto"/>
+<script>
+  import { onDestroy } from "svelte";
+
+  let show = false;
+  const timeout = setTimeout(() => (show = true), 200);
+  onDestroy(() => clearTimeout(timeout));
+</script>
+
+{#if show}
+  <div class="text-center">
+    <img src="popcorn.gif" alt="loader" class="mx-auto" />
     <p>Loading movies...</p>
   </div>
+{/if}
