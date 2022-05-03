@@ -28,6 +28,6 @@
     }
 </script>
 
-<div class={`inline-block rounded-md mr-1 mb-2 px-1.5 text-sm text-center shadow-md ${getColor(time.label)}`}>
+<div class={`inline-block rounded-md mr-1 mb-2 px-1.5 text-sm text-center ${getColor(time.label)}`}>
     {time.start} – {time.end} ({time.label})
 </div>
