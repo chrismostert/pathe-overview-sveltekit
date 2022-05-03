@@ -2,7 +2,7 @@
   import { onDestroy } from "svelte";
 
   let show = false;
-  const timeout = setTimeout(() => (show = true), 100);
+  const timeout = setTimeout(() => (show = true), 200);
   onDestroy(() => clearTimeout(timeout));
 </script>
 
