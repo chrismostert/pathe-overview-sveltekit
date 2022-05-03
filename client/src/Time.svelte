@@ -13,18 +13,21 @@
             label == "Opera" ||
             label == "Horror Night"
         ) {
-            return "text-white bg-black";
+            return "text-white bg-[#188FA7]";
         }
         if (label == "Expat Night") {
-            return "bg-[#B09A61]";
+            return "text-white bg-[#5C5346]";
         }
         if (label == "Ladies Night") {
-            return "text-white bg-[#c821ac]";
+            return "bg-[#F49FBC]";
         }
-        return "bg-[#CFD6EA]";
+        if (label == "2D") {
+            return "bg-[#D8DBE2]";
+        }
+        return ""
     }
 </script>
 
-<div class={`inline-block rounded-md mr-4 mb-1 p-1 ${getColor(time.label)}`}>
+<div class={`inline-block rounded-md mr-4 mb-1  px-3 ${getColor(time.label)}`}>
     {time.start} – {time.end} ({time.label})
 </div>
