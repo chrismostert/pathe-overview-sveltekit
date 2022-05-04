@@ -192,5 +192,10 @@ async function getCinemas() {
     })
 
 
-    return _.uniqBy(res, 'cinema_name')
+    return res.reduce((unique, o) => {
+        if (!unique.some(obj => obj.cinema_name === o.cinema_name)) {
+            unique.push(o)
+        }
+        return unique
+    }, [])
 }
