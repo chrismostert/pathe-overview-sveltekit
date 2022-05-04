@@ -1,8 +1,12 @@
 const cheerio = require("cheerio")
 const axios = require("axios")
 const Levenshtein = require("fast-levenshtein")
+const _ = require('lodash')
 
-module.exports = getAllMovieInfo
+module.exports = {
+    getAllMovieInfo,
+    getCinemas
+}
 
 async function getAllMovieInfo(cinemaId) {
     let cacheKey = `getAllMovieInfo_${cinemaId}`
@@ -48,6 +52,7 @@ async function getMovieInfo(link, cinemaId) {
     return res
 }
 
+// Basic movie info, rarely changes so cache TTL can be something like a week
 async function getPathe(link) {
     let cacheKey = `getPathe_${link}`
     let cached = module.parent.cache.get(cacheKey)
@@ -77,7 +82,7 @@ async function getPathe(link) {
             poster
         }
 
-        module.parent.cache.set(cacheKey, result)
+        module.parent.cache.set(cacheKey, result, 7 * 24 * 3600)
         return result
     }
     return cached
@@ -163,8 +168,29 @@ async function getRT(title, year) {
             }
         }
 
-        module.parent.cache.set(cacheKey, res)
+        // Might change semi-often, fetch daily from cache
+        module.parent.cache.set(cacheKey, res, 24 * 3600)
         return res
     }
     return cached
+}
+
+async function getCinemas() {
+    let html = axios.get("https://www.pathe.nl/bioscoopagenda").then(res => res.data)
+    let $ = cheerio.load(await html)
+
+    let res = []
+
+    $(".filter__input-list li").each((_, elem) => {
+        let cinema_elem = $(elem).find(".cinema.checkbox")
+        let value = cinema_elem.attr("value")
+        let name = cinema_elem.attr("data-show-value")
+        res.push({
+            "cinema_name": name,
+            "cinema_id": value
+        })
+    })
+
+
+    return _.uniqBy(res, 'cinema_name')
 }

@@ -6,7 +6,8 @@ const app = express()
 app.use(cors())
 const port = 3000
 
-module.cache = new NodeCache({ stdTTL: 7200 });
+// Standard cache duration is two hours
+module.cache = new NodeCache({ stdTTL: 7200});
 
 app.get('/movies', async (req, res) => {
     const cinemaId = req.query.cinema
@@ -17,10 +18,19 @@ app.get('/movies', async (req, res) => {
     }
 
     try {
-        let result = await movieService(cinemaId)
+        let result = await movieService.getAllMovieInfo(cinemaId)
         res.json(result)
     } catch {
         res.status(500).json("Something went wrong!")
+    }
+})
+
+app.get('/cinemas', async (req, res) => {
+    try {
+        let result = await movieService.getCinemas()
+        res.json(result)
+    } catch (e) {
+        res.status(500).json(`Error fetching cinemas: ${e}`)
     }
 })
 
