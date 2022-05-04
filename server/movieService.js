@@ -1,7 +1,6 @@
 const cheerio = require("cheerio")
 const axios = require("axios")
 const Levenshtein = require("fast-levenshtein")
-const _ = require('lodash')
 
 module.exports = {
     getAllMovieInfo,
