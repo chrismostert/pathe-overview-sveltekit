@@ -1,8 +1,11 @@
 <script>
   import { onMount } from "svelte";
+  import Banner from "./Banner.svelte";
   import Spinner from "./Spinner.svelte";
   import PosterBlock from "./PosterBlock.svelte";
   import InfoBlock from "./InfoBlock.svelte";
+
+  const CINEMAID_DEFAULT = 18; 
 
   let movies = [];
   let moviesLoaded = false;
@@ -10,7 +13,7 @@
   onMount(async () => {
     moviesLoaded = false;
     // Fetch data
-    const res = await fetch("process.env.API_URL/movies?cinema=18");
+    const res = await fetch(`process.env.API_URL/movies?cinema=${CINEMAID_DEFAULT}`);
     let moviesJson = await res.json();
 
     // Is playing in selected cinema?
@@ -36,31 +39,33 @@
 </script>
 
 <main>
-  <div class="container relative mx-auto py-4">
-    {#if !moviesLoaded}
-      <Spinner />
-    {:else}
-      {#each movies as movie}
-        <!-- Card -->
-        <div
-          class="max-w-4xl mx-auto p-4 mb-1 shadow-md border-2"
-        >
-          <!-- Title -->
-          <div class="mb-2">
-            <a
-              href={`https://www.pathe.nl/film/${movie.patheID}`}
-              class="text-xl font-bold text-cyan-700 hover:text-cyan-900">{movie.titleVisual}</a
-            >
-          </div>
+  <div class="container relative mx-auto">
+    <div class="max-w-4xl mx-auto">
+      <Banner {CINEMAID_DEFAULT} />
 
-          <div class="flex">
-            <PosterBlock {movie} />
-            <InfoBlock {movie} />
+      {#if !moviesLoaded}
+        <Spinner />
+      {:else}
+        {#each movies as movie}
+          <!-- Card -->
+          <div class="p-4 mb-1 shadow-md border-2">
+            <!-- Title -->
+            <div class="mb-2">
+              <a
+                href={`https://www.pathe.nl/film/${movie.patheID}`}
+                class="text-xl font-bold text-cyan-700 hover:text-cyan-900"
+                >{movie.titleVisual}</a
+              >
+            </div>
+
+            <div class="flex">
+              <PosterBlock {movie} />
+              <InfoBlock {movie} />
+            </div>
           </div>
-          
-        </div>
-      {/each}
-    {/if}
+        {/each}
+      {/if}
+    </div>
   </div>
 </main>
 
