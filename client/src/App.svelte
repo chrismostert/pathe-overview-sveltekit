@@ -5,15 +5,15 @@
   import PosterBlock from "./PosterBlock.svelte";
   import InfoBlock from "./InfoBlock.svelte";
 
-  const CINEMAID_DEFAULT = 18; 
+  const CINEMAID_DEFAULT = "18"; 
 
   let movies = [];
   let moviesLoaded = false;
 
-  onMount(async () => {
+  async function loadMovies(cinema_id) {
     moviesLoaded = false;
     // Fetch data
-    const res = await fetch(`process.env.API_URL/movies?cinema=${CINEMAID_DEFAULT}`);
+    const res = await fetch(`process.env.API_URL/movies?cinema=${cinema_id}`);
     let moviesJson = await res.json();
 
     // Is playing in selected cinema?
@@ -35,7 +35,13 @@
     // Set movie variable
     movies = moviesJson;
     moviesLoaded = true;
+  }
+
+  // Initial page load defaults to the default cinema selection
+  onMount(async () => {
+    loadMovies(CINEMAID_DEFAULT)
   });
+
 </script>
 
 <main>
