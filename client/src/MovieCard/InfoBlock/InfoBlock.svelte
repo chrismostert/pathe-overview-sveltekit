@@ -8,7 +8,7 @@
   <p>{movie.description}</p>
 
   <!-- Date/times -->
-  <div class="mt-4">
+  <div class="mt-2">
     {#each movie.dateTimes as datetime}
       <p class="font-medium">{datetime.day}</p>
       <div class="flex flex-wrap">
