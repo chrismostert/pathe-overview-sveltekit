@@ -19,7 +19,7 @@
         <Spinner />
       {:else}
         {#each $movies as movie}
-        <div in:scale={{duration:200}}>
+        <div in:scale>
           <MovieCard {movie} />
         </div>
         {/each}
