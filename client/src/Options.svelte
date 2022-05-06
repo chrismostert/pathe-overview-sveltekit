@@ -12,7 +12,7 @@
     
 </script>
 
-<div class="py-2 px-4 shadow-md mb-1 border-2">
+<div class="py-2 px-4 shadow-md mb-1">
     <label for="cinemas">Bioscoop:</label>
     <select bind:value={$cinema_id} id="cinemas" class="outline-none border-2 bg-white">
         {#each cinemas as cinema}

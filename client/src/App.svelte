@@ -1,4 +1,5 @@
 <script>
+  import { scale } from "svelte/transition";
   import { cinema_id, moviesLoaded, movies } from "./store";
   import { loadMovies } from "./movieService";
   import Options from "./Options.svelte";
@@ -10,18 +11,17 @@
 </script>
 
 <main>
-  <div class="container relative mx-auto">
-    <div class="max-w-4xl mx-auto">
-      <Options />
-
-      {#if !$moviesLoaded}
-        <Spinner />
-      {:else}
-        {#each $movies as movie}
+  <div class="max-w-4xl mx-auto">
+    <Options />
+    {#if !$moviesLoaded}
+      <Spinner />
+    {:else}
+      {#each $movies as movie}
+        <div in:scale>
           <MovieCard {movie} />
-        {/each}
-      {/if}
-    </div>
+        </div>
+      {/each}
+    {/if}
   </div>
 </main>
 
