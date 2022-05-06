@@ -4,7 +4,7 @@
     export let movie;
 </script>
 
-<div class="p-4 mb-1 shadow-md border-2">
+<div class="p-4 mb-1 shadow-md">
     <div class="mb-2">
         <a
             href={`https://www.pathe.nl/film/${movie.patheID}`}

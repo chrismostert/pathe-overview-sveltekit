@@ -11,20 +11,17 @@
 </script>
 
 <main>
-  <div class="container relative mx-auto">
-    <div class="max-w-4xl mx-auto">
-      <Options />
-
-      {#if !$moviesLoaded}
-        <Spinner />
-      {:else}
-        {#each $movies as movie}
+  <div class="max-w-4xl mx-auto">
+    <Options />
+    {#if !$moviesLoaded}
+      <Spinner />
+    {:else}
+      {#each $movies as movie}
         <div in:scale>
           <MovieCard {movie} />
         </div>
-        {/each}
-      {/if}
-    </div>
+      {/each}
+    {/if}
   </div>
 </main>
 
