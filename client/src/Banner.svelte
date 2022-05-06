@@ -1,9 +1,8 @@
 <script>
-    export let CINEMAID_DEFAULT;
     import { onMount } from "svelte";
+    import { cinema_id } from "./store"
 
     let cinemas = [];
-    let selected = CINEMAID_DEFAULT;
 
     onMount(async () => {
         // Fetch cinemas
@@ -15,7 +14,7 @@
 
 <div class="py-2 px-4 shadow-md mb-1 border-2">
     <label for="cinemas">Bioscoop:</label>
-    <select bind:value={selected} id="cinemas">
+    <select bind:value={$cinema_id} id="cinemas">
         {#each cinemas as cinema}
             <option value={cinema.cinema_id}>{cinema.cinema_name}</option>
         {/each}

@@ -1,11 +1,10 @@
 <script>
   import { onMount } from "svelte";
+  import { cinema_id } from "./store";
   import Banner from "./Banner.svelte";
   import Spinner from "./Spinner.svelte";
   import PosterBlock from "./PosterBlock.svelte";
   import InfoBlock from "./InfoBlock.svelte";
-
-  const CINEMAID_DEFAULT = "18"; 
 
   let movies = [];
   let moviesLoaded = false;
@@ -37,17 +36,17 @@
     moviesLoaded = true;
   }
 
-  // Initial page load defaults to the default cinema selection
-  onMount(async () => {
-    loadMovies(CINEMAID_DEFAULT)
-  });
+  // On change load new movies
+  $: {
+    loadMovies($cinema_id)
+  }
 
 </script>
 
 <main>
   <div class="container relative mx-auto">
     <div class="max-w-4xl mx-auto">
-      <Banner {CINEMAID_DEFAULT} />
+      <Banner />
 
       {#if !moviesLoaded}
         <Spinner />
