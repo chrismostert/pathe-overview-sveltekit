@@ -1,10 +1,8 @@
 <script>
-  import { onMount } from "svelte";
   import { cinema_id } from "./store";
-  import Banner from "./Banner.svelte";
+  import Options from "./Options.svelte";
   import Spinner from "./Spinner.svelte";
-  import PosterBlock from "./PosterBlock.svelte";
-  import InfoBlock from "./InfoBlock.svelte";
+  import MovieCard from "./MovieCard/MovieCard.svelte";
 
   let movies = [];
   let moviesLoaded = false;
@@ -38,36 +36,20 @@
 
   // On change load new movies
   $: {
-    loadMovies($cinema_id)
+    loadMovies($cinema_id);
   }
-
 </script>
 
 <main>
   <div class="container relative mx-auto">
     <div class="max-w-4xl mx-auto">
-      <Banner />
+      <Options />
 
       {#if !moviesLoaded}
         <Spinner />
       {:else}
         {#each movies as movie}
-          <!-- Card -->
-          <div class="p-4 mb-1 shadow-md border-2">
-            <!-- Title -->
-            <div class="mb-2">
-              <a
-                href={`https://www.pathe.nl/film/${movie.patheID}`}
-                class="text-xl font-bold text-cyan-700 hover:text-cyan-900"
-                >{movie.titleVisual}</a
-              >
-            </div>
-
-            <div class="flex">
-              <PosterBlock {movie} />
-              <InfoBlock {movie} />
-            </div>
-          </div>
+          <MovieCard {movie} />
         {/each}
       {/if}
     </div>
