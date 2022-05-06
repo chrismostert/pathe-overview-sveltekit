@@ -14,7 +14,7 @@
 
 <div class="py-2 px-4 shadow-md mb-1 border-2">
     <label for="cinemas">Bioscoop:</label>
-    <select bind:value={$cinema_id} id="cinemas">
+    <select bind:value={$cinema_id} id="cinemas" class="outline-none">
         {#each cinemas as cinema}
             <option value={cinema.cinema_id}>{cinema.cinema_name}</option>
         {/each}
