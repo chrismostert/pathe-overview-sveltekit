@@ -1,5 +1,5 @@
 <script>
-  import { scale } from "svelte/transition";
+  import { fade } from "svelte/transition";
   import { cinema_id, moviesLoaded, movies } from "./store";
   import { loadMovies } from "./movieService";
   import Options from "./Options.svelte";
@@ -17,7 +17,7 @@
       <Spinner />
     {:else}
       {#each $movies as movie}
-        <div in:scale>
+        <div in:fade={{duration:100}}>
           <MovieCard {movie} />
         </div>
       {/each}
