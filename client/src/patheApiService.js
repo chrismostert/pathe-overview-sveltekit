@@ -21,3 +21,8 @@ export async function loadMovies(id) {
 
     return moviesJson;
 }
+
+export async function loadCinemas() {
+    const res = await fetch("process.env.API_URL/cinemas");
+    return await res.json();
+}
