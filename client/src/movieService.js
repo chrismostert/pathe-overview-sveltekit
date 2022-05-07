@@ -1,7 +1,4 @@
-import { moviesLoaded, movies } from "./store";
-
 export async function loadMovies(id) {
-    moviesLoaded.set(false);
     // Fetch data
     const res = await fetch(`process.env.API_URL/movies?cinema=${id}`);
     let moviesJson = await res.json();
@@ -22,7 +19,5 @@ export async function loadMovies(id) {
         return scoreB - scoreA;
     });
 
-    // Set movie variable
-    movies.set(moviesJson);
-    moviesLoaded.set(true);
+    return moviesJson;
 }
