@@ -29,8 +29,8 @@ app.get('/movies', async (req, res) => {
 app.get('/cinemas', async (req, res) => {
     try {
         let result = await movieService.getCinemas()
-        // Cache for 30 days
-        res.set('Cache-control', 'public, max-age=2592000')
+        // Cache for 10 days
+        res.set('Cache-control', 'public, max-age=36000')
         res.json(result)
     } catch (e) {
         res.status(500).json(`Error fetching cinemas: ${e}`)
