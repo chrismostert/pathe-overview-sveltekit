@@ -8,34 +8,27 @@ module.exports = {
 }
 
 async function getAllMovieInfo(cinemaId) {
-    let cacheKey = `getAllMovieInfo_${cinemaId}`
-    let cached = module.parent.cache.get(cacheKey)
-    if (cached == undefined) {
-        const mainLink = "https://www.pathe.nl/films/actueel?page="
-        const movieBase = "https://www.pathe.nl"
+    const mainLink = "https://www.pathe.nl/films/actueel?page="
+    const movieBase = "https://www.pathe.nl"
 
-        let pageNum = 1
-        let movies = []
+    let pageNum = 1
+    let movies = []
 
-        while (true) {
-            const html = await axios.get(mainLink + pageNum).then(res => res.data)
-            const $ = cheerio.load(html)
-            let posters = $('.poster')
+    while (true) {
+        const html = await axios.get(mainLink + pageNum).then(res => res.data)
+        const $ = cheerio.load(html)
+        let posters = $('.poster')
 
-            if (posters.length == 0) break
+        if (posters.length == 0) break
 
-            posters.each((_, elem) => {
-                movies.push(getMovieInfo(movieBase + elem.attribs['href'], cinemaId))
-            })
+        posters.each((_, elem) => {
+            movies.push(getMovieInfo(movieBase + elem.attribs['href'], cinemaId))
+        })
 
-            pageNum += 1
-        }
-
-        let result = await Promise.all(movies)
-        module.parent.cache.set(cacheKey, result)
-        return result
+        pageNum += 1
     }
-    return cached
+
+    return await Promise.all(movies)
 }
 
 async function getMovieInfo(link, cinemaId) {
@@ -175,35 +168,26 @@ async function getRT(title, year) {
 }
 
 async function getCinemas() {
-    let cacheKey = "getCinemas"
-    let cached = module.parent.cache.get(cacheKey)
-    if (cached == undefined) {
-        let html = axios.get("https://www.pathe.nl/bioscoopagenda").then(res => res.data)
-        let $ = cheerio.load(await html)
+    let html = axios.get("https://www.pathe.nl/bioscoopagenda").then(res => res.data)
+    let $ = cheerio.load(await html)
 
-        let res = []
+    let res = []
 
-        $(".filter__input-list li").each((_, elem) => {
-            let cinema_elem = $(elem).find(".cinema.checkbox")
-            let value = cinema_elem.attr("value")
-            let name = cinema_elem.attr("data-show-value")
-            res.push({
-                "cinema_name": name,
-                "cinema_id": value
-            })
+    $(".filter__input-list li").each((_, elem) => {
+        let cinema_elem = $(elem).find(".cinema.checkbox")
+        let value = cinema_elem.attr("value")
+        let name = cinema_elem.attr("data-show-value")
+        res.push({
+            "cinema_name": name,
+            "cinema_id": value
         })
+    })
 
 
-        res =  res.reduce((unique, o) => {
-            if (!unique.some(obj => obj.cinema_name === o.cinema_name)) {
-                unique.push(o)
-            }
-            return unique
-        }, [])
-
-        // New cinemas are rare, so we cache the value for a month (30 days)
-        module.parent.cache.set(cacheKey, res, 30 * 24 * 3600)
-        return res
-    }
-    return cached
+    return res.reduce((unique, o) => {
+        if (!unique.some(obj => obj.cinema_name === o.cinema_name)) {
+            unique.push(o)
+        }
+        return unique
+    }, [])
 }
