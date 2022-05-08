@@ -19,6 +19,7 @@ app.get('/movies', async (req, res) => {
 
     try {
         let result = await movieService.getAllMovieInfo(cinemaId)
+        res.set('Cache-control', 'public, max-age=7200')
         res.json(result)
     } catch {
         res.status(500).json("Something went wrong!")
