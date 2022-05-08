@@ -168,35 +168,26 @@ async function getRT(title, year) {
 }
 
 async function getCinemas() {
-    let cacheKey = "getCinemas"
-    let cached = module.parent.cache.get(cacheKey)
-    if (cached == undefined) {
-        let html = axios.get("https://www.pathe.nl/bioscoopagenda").then(res => res.data)
-        let $ = cheerio.load(await html)
+    let html = axios.get("https://www.pathe.nl/bioscoopagenda").then(res => res.data)
+    let $ = cheerio.load(await html)
 
-        let res = []
+    let res = []
 
-        $(".filter__input-list li").each((_, elem) => {
-            let cinema_elem = $(elem).find(".cinema.checkbox")
-            let value = cinema_elem.attr("value")
-            let name = cinema_elem.attr("data-show-value")
-            res.push({
-                "cinema_name": name,
-                "cinema_id": value
-            })
+    $(".filter__input-list li").each((_, elem) => {
+        let cinema_elem = $(elem).find(".cinema.checkbox")
+        let value = cinema_elem.attr("value")
+        let name = cinema_elem.attr("data-show-value")
+        res.push({
+            "cinema_name": name,
+            "cinema_id": value
         })
+    })
 
 
-        res = res.reduce((unique, o) => {
-            if (!unique.some(obj => obj.cinema_name === o.cinema_name)) {
-                unique.push(o)
-            }
-            return unique
-        }, [])
-
-        // New cinemas are rare, so we cache the value for a month (30 days)
-        module.parent.cache.set(cacheKey, res, 30 * 24 * 3600)
-        return res
-    }
-    return cached
+    return res.reduce((unique, o) => {
+        if (!unique.some(obj => obj.cinema_name === o.cinema_name)) {
+            unique.push(o)
+        }
+        return unique
+    }, [])
 }
