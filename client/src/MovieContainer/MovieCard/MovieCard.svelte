@@ -1,6 +1,7 @@
 <script>
     import PosterBlock from "./PosterBlock/PosterBlock.svelte";
     import InfoBlock from "./InfoBlock/InfoBlock.svelte";
+    import { hidden_movies } from "../../options";
     export let movie;
 </script>
 
@@ -10,6 +11,10 @@
             href={`https://www.pathe.nl/film/${movie.patheID}`}
             class="text-xl font-bold text-cyan-700 hover:text-cyan-900"
             >{movie.titleVisual}</a
+        >
+
+        <button
+            on:click={hidden_movies.update(hidden => [...hidden, movie.patheID])}>Hide</button
         >
     </div>
 
