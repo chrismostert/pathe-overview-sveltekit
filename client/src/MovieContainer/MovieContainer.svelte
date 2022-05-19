@@ -21,7 +21,7 @@
 
     // Apply filters
     $: renderedMovies = movies.filter(
-        (movie) => !$hidden_movies.includes(movie.patheID)
+        (movie) => !$hidden_movies.hasOwnProperty(movie.patheID)
     );
     
 </script>
@@ -31,8 +31,8 @@
 {:else}
     {#each renderedMovies as movie (movie.patheID)}
         <div
-            in:fade={{ duration: 100 }}
-            animate:flip={{ duration: 100 }}
+            in:fade={{ duration: 200 }}
+            animate:flip={{ duration: 500 }}
         >
             <MovieCard {movie} />
         </div>

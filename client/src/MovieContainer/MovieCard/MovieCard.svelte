@@ -14,8 +14,22 @@
         >
 
         <button
-            on:click={hidden_movies.update(hidden => [...hidden, movie.patheID])}>Hide</button
+            class="text-xs px-1.5 bg-gray-100 hover:bg-gray-300 rounded-md float-right"
+            on:click={() => {
+                hidden_movies.update((hidden) => {
+                    hidden[movie.patheID] = true;
+                    return hidden;
+                });
+
+                let stored = localStorage.getItem("hidden_movies");
+                let persisted_obj = stored ? JSON.parse(stored) : {};
+
+                persisted_obj[movie.patheID] = true;
+                localStorage.hidden_movies = JSON.stringify(persisted_obj);
+            }}
         >
+            Hide
+        </button>
     </div>
 
     <div class="flex">
