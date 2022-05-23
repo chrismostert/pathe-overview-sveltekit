@@ -3,7 +3,7 @@
   export let movie;
 </script>
 
-<div class="flex flex-col">
+<div>
   <!-- Description -->
   <p>{movie.description}</p>
 
@@ -11,7 +11,7 @@
   <div class="mt-2">
     {#each movie.dateTimes as datetime}
       <p class="font-medium">{datetime.day}</p>
-      <div class="flex flex-wrap">
+      <div class="flex flex-wrap justify-center xxs:justify-start">
         {#each datetime.times as time}
           <Time {time} />
         {/each}
