@@ -3,7 +3,7 @@
     export let movie;
 </script>
 
-<div class="inline-block mr-4 shrink-0">
+<div class="inline-block ml-auto mr-auto xxs:mr-4 shrink-0">
     <img
         src={movie.poster.includes("poster_missing.png")
             ? `https://www.pathe.nl/${movie.poster}`

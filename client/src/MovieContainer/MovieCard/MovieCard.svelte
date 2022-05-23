@@ -17,7 +17,7 @@
             >
         </div>
 
-        <div class="flex">
+        <div class="flex flex-wrap xxs:flex-nowrap">
             <PosterBlock {movie} />
             <InfoBlock {movie} />
         </div>
