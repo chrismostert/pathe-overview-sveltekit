@@ -1,25 +1,40 @@
 <script>
     import Spinner from "./Spinner.svelte";
     import MovieCard from "./MovieCard/MovieCard.svelte";
-    import { fade } from "svelte/transition";
-    import { cinema_id } from "../options";
+    import { fade, scale, fly } from "svelte/transition";
+    import { flip } from "svelte/animate";
+    import { cinema_id, hidden_movies } from "../options";
     import { loadMovies } from "../patheApiService";
+
+    let loading = true;
     let movies = [];
+    let renderedMovies = [];
 
     // On change load new movies
-    $: movies = loadMovies($cinema_id);
+    $: {
+        loading = true;
+        loadMovies($cinema_id).then((res) => {
+            loading = false;
+            movies = res;
+        });
+    }
+
+    // Apply filters
+    $: renderedMovies = movies.filter(
+        (movie) => !$hidden_movies.hasOwnProperty(movie.patheID)
+    );
+    
 </script>
 
-{#await movies}
+{#if loading}
     <Spinner />
-{:then movies}
-    {#each movies as movie}
-        <div in:fade={{ duration: 100 }}>
+{:else}
+    {#each renderedMovies as movie (movie.patheID)}
+        <div
+            in:fade={{ duration: 200 }}
+            animate:flip={{ duration: 500 }}
+        >
             <MovieCard {movie} />
         </div>
     {/each}
-{:catch error}
-    <div>
-        {error}
-    </div>
-{/await}
+{/if}
