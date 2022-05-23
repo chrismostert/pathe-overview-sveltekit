@@ -2,6 +2,7 @@
     import { onMount } from "svelte";
     import { cinema_id } from "./options";
     import { loadCinemas } from "./patheApiService";
+    import { hidden_movies } from "./options";
 
     let cinemas = [];
 
@@ -29,7 +30,11 @@
         </div>
 
         <button
-            class="bg-gray-100 hover:bg-gray-300 rounded-md px-1.5 mt-2 xs:mt-0"
+            on:click={() => {
+                hidden_movies.set({});
+                localStorage.hidden_movies = "{}";
+            }}
+            class="bg-gray-100 hover:bg-gray-300 rounded-md px-1.5 mt-2 xs:mt-0 text-xs"
             id="clear-btn">Clear hidden movies</button
         >
     </div>
