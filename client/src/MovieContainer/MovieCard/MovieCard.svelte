@@ -5,7 +5,7 @@
     export let movie;
 </script>
 
-<div class="relative">
+<div class="relative text-center xxs:text-left">
     <HideButton {movie} />
 
     <div class="p-4 mb-1 shadow-md">
@@ -17,7 +17,7 @@
             >
         </div>
 
-        <div class="flex">
+        <div class="flex flex-wrap xxs:flex-nowrap">
             <PosterBlock {movie} />
             <InfoBlock {movie} />
         </div>
