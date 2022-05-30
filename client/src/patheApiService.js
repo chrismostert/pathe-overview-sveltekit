@@ -4,22 +4,32 @@ export async function loadMovies(id) {
     let moviesJson = await res.json();
 
     // Is playing in selected cinema?
-    moviesJson = moviesJson.filter((movie) => movie.dateTimes.length > 0);
+    return moviesJson.filter((movie) => movie.dateTimes.length > 0);
+}
 
-    // Sort by critic score
-    moviesJson.sort((a, b) => {
+// TODO refactor this to be more sane
+export function sortMovies(movies, byCritics) {
+    return movies.sort((a, b) => {
         let scoreA = 0;
         let scoreB = 0;
-        if (a.rtData && a.rtData.scores && a.rtData.scores.criticsScore) {
-            scoreA = a.rtData.scores.criticsScore;
-        }
-        if (b.rtData && b.rtData.scores && b.rtData.scores.criticsScore) {
-            scoreB = b.rtData.scores.criticsScore;
+
+        if (byCritics) {
+            if (a.rtData && a.rtData.scores && a.rtData.scores.criticsScore) {
+                scoreA = a.rtData.scores.criticsScore;
+            }
+            if (b.rtData && b.rtData.scores && b.rtData.scores.criticsScore) {
+                scoreB = b.rtData.scores.criticsScore;
+            }
+        } else {
+            if (a.rtData && a.rtData.scores && a.rtData.scores.audienceScore) {
+                scoreA = a.rtData.scores.audienceScore;
+            }
+            if (b.rtData && b.rtData.scores && b.rtData.scores.audienceScore) {
+                scoreB = b.rtData.scores.audienceScore;
+            }
         }
         return scoreB - scoreA;
     });
-
-    return moviesJson;
 }
 
 export async function loadCinemas() {
