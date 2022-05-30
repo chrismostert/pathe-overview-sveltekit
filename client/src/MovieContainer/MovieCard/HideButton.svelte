@@ -1,5 +1,5 @@
 <script>
-    import { hidden_movies } from "../../options";
+    import { hidden_movies } from "../../store";
     export let movie;
 </script>
 
