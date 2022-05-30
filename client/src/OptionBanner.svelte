@@ -1,8 +1,8 @@
 <script>
     import { onMount } from "svelte";
-    import { cinema_id } from "./options";
+    import { cinema_id } from "./store";
     import { loadCinemas } from "./patheApiService";
-    import { hidden_movies } from "./options";
+    import { hidden_movies } from "./store";
 
     let cinemas = [];
 

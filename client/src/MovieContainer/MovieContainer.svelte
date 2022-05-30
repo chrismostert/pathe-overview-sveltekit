@@ -3,7 +3,7 @@
     import MovieCard from "./MovieCard/MovieCard.svelte";
     import { fade, scale, fly } from "svelte/transition";
     import { flip } from "svelte/animate";
-    import { cinema_id, hidden_movies } from "../options";
+    import { cinema_id, hidden_movies } from "../store";
     import { loadMovies } from "../patheApiService";
 
     let loading = true;

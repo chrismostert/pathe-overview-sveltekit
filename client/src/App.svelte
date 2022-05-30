@@ -1,7 +1,10 @@
 <script>
   import OptionBanner from "./OptionBanner.svelte";
-  import MovieContainer from "./MovieContainer/MovieContainer.svelte";  
+  import MovieContainer from "./MovieContainer/MovieContainer.svelte";
+  import { window_width } from "./store";
 </script>
+
+<svelte:window bind:innerWidth={$window_width} />
 
 <main>
   <div class="max-w-4xl mx-auto">
