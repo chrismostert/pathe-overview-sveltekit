@@ -1,8 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
-	export let cinemas;
-
-	let selected = '0';
+	export let cinemas, selected;
 </script>
 
 <div class="mb-1 py-2 px-4 shadow-md">
