@@ -1,4 +1,4 @@
-import { get as levenshtein } from 'fast-levenshtein';
+import levenshtein from 'fast-levenshtein';
 
 const TITLE_PARAM = 'title';
 const YEAR_PARAM = 'year';
@@ -28,7 +28,7 @@ export async function GET({ url }) {
 
 	let getScore = (hit) => {
 		return (
-			levenshtein(hit.title, q_title) + 0.1 * Math.abs(parseInt(hit.releaseYear) - parseInt(q_year))
+			levenshtein.get(hit.title, q_title) + 0.1 * Math.abs(parseInt(hit.releaseYear) - parseInt(q_year))
 		);
 	};
 
@@ -61,7 +61,7 @@ export async function GET({ url }) {
 	}
 
 	let res = undefined;
-	if (levenshtein(best.title, q_title) < 5) {
+	if (levenshtein.get(best.title, q_title) < 5) {
 		res = {
 			id: best.rtId,
 			title: best.title,
