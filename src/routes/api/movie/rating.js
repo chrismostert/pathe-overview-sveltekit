@@ -28,7 +28,8 @@ export async function GET({ url }) {
 
 	let getScore = (hit) => {
 		return (
-			levenshtein.get(hit.title, q_title) + 0.1 * Math.abs(parseInt(hit.releaseYear) - parseInt(q_year))
+			levenshtein.get(hit.title, q_title) +
+			0.1 * Math.abs(parseInt(hit.releaseYear) - parseInt(q_year))
 		);
 	};
 
