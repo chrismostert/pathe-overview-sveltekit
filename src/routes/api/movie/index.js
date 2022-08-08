@@ -24,6 +24,9 @@ export async function GET() {
 		}
 
 		return {
+			headers: {
+				'Cache-Control': 'max-age=7200, public'
+			},
 			body: {
 				movies
 			}
