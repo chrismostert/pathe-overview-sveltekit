@@ -1,6 +1,6 @@
 <script context="module">
 	export async function load({ fetch, params }) {
-		let response = await fetch('/api/cinemas');
+		let response = await fetch('/api/cinema');
 
 		if (response.ok) {
 			return {
