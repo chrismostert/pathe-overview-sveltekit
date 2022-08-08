@@ -17,6 +17,9 @@ export async function GET({ params }) {
 		let poster = $('.visual-movie__poster img').attr('src');
 
 		return {
+			headers: {
+				'Cache-Control': 'max-age=86400, public'
+			},
 			body: {
 				title_visual,
 				title,

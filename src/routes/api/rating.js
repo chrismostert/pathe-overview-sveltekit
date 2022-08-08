@@ -76,6 +76,9 @@ export async function GET({ url }) {
 	}
 
 	return {
+		headers: {
+			'Cache-Control': 'max-age=7200, public'
+		},
 		body: res
 	};
 }
