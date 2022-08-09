@@ -1,6 +1,6 @@
 <script>
-	export let movies, times
+	import MovieContainer from '$lib/components/MovieContainer.svelte';
+	export let movies, times;
 </script>
 
-{JSON.stringify(movies)}
-{JSON.stringify(times)}
+<MovieContainer {movies} />
