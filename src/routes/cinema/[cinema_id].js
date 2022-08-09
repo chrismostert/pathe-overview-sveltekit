@@ -1,5 +1,5 @@
 import pLimit from 'p-limit';
-const limit = pLimit(30);
+const limit = pLimit(20);
 
 export async function GET({ params, url }) {
 	let movielist = await fetch(`${url.origin}/api/movie`).then(

@@ -1,15 +1,6 @@
-<script context="module">
-	export async function load({ params }) {
-		return {
-			props: {
-				cinema_id: params.cinema_id
-			}
-		};
-	}
-</script>
-
 <script>
-	export let cinema_id;
+	export let movies, times
 </script>
 
-<h1>Hello {cinema_id}</h1>
+{JSON.stringify(movies)}
+{JSON.stringify(times)}
