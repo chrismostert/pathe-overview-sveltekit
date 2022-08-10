@@ -1,6 +1,9 @@
 <script>
 	import MovieContainer from '$lib/components/MovieContainer.svelte';
-	export let movies
+	export let movies;
 </script>
 
-<MovieContainer {movies} />
+{#each movies as movie}
+	<h1>{movie.title}</h1>
+{/each}
+<!--<MovieContainer {movies} />-->
