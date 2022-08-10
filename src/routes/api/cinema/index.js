@@ -19,7 +19,7 @@ export async function GET() {
 
 		return {
 			headers: {
-				'Cache-Control': 'max-age=2592000, public'
+				'Cache-Control': 's-maxage=2592000'
 			},
 			body: {
 				cinemas: [...res].map(JSON.parse)

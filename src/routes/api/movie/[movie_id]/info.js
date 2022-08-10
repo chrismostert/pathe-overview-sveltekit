@@ -18,7 +18,7 @@ export async function GET({ params }) {
 
 		return {
 			headers: {
-				'Cache-Control': 'max-age=86400, public'
+				'Cache-Control': 's-maxage=86400'
 			},
 			body: {
 				title_visual,
