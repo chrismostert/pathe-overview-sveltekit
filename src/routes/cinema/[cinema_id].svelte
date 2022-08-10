@@ -7,10 +7,6 @@
 			props: {
 				movies: resp_obj.movies,
 				times: resp_obj.times
-			},
-			cache: {
-				"maxage": 3600,
-				"private": false
 			}
 		}
 	}

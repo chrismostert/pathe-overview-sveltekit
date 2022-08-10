@@ -26,6 +26,9 @@ export async function GET({ params }) {
 		.toArray();
 
 	return {
+		headers: {
+			'Cache-Control': 's-maxage=86400'
+		},
 		body: date_times
 	};
 }
