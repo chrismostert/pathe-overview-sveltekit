@@ -28,6 +28,10 @@
 
 <div class="mx-auto max-w-4xl">
 	<OptionBanner {cinemas} {selected} />
+	{#each cinemas as cinema}
+	<a href={`/cinema/${cinema.cinema_id}`}>{cinema.cinema_name}</a>
+	<br />
+	{/each}
 	<main>
 		<slot />
 	</main>

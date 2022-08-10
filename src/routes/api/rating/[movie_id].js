@@ -12,10 +12,17 @@ export async function GET({ params, url }) {
 		};
 	}
 
+    let info = await fetch(`${url.origin}/api/movie/${params.movie_id}`).then(
+		async (response) => await response.json()
+	);
+
+    let title_q = info.title;
+    let year_q = info.year;
+
 	let getScore = (hit) => {
 		return (
-			levenshtein.get(hit.title, params.title) +
-			0.1 * Math.abs(parseInt(hit.releaseYear) - parseInt(params.year))
+			levenshtein.get(hit.title, title_q) +
+			0.1 * Math.abs(parseInt(hit.releaseYear) - parseInt(year_q))
 		);
 	};
 
@@ -23,7 +30,7 @@ export async function GET({ params, url }) {
 		requests: [
 			{
 				indexName: 'content_rt',
-				query: params.title,
+				query: title_q,
 				params: 'filters=rtId%20%3E%200%20AND%20isEmsSearchable%20%3D%201&hitsPerPage=5'
 			}
 		]
@@ -48,7 +55,7 @@ export async function GET({ params, url }) {
 	}
 
 	let res = undefined;
-	if (levenshtein.get(best.title, params.title) < 5) {
+	if (levenshtein.get(best.title, title_q) < 5) {
 		res = {
 			id: best.rtId,
 			title: best.title,
