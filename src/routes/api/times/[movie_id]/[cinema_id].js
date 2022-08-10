@@ -27,7 +27,7 @@ export async function GET({ params }) {
 
 	return {
 		headers: {
-			'Cache-Control': 's-maxage=86400'
+			'Cache-Control': 's-maxage=1800'
 		},
 		body: date_times
 	};
