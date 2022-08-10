@@ -23,9 +23,6 @@ export async function GET({ params, url }) {
 	);
 
 	return {
-		headers: {
-			'Cache-Control': 's-maxage=3600'
-		},
 		body: {
 			movies: await movies,
 			times: await times
