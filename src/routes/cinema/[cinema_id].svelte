@@ -7,7 +7,4 @@
 	export let movies;
 </script>
 
-{#each movies as movie}
-	<h1>{movie.title}</h1>
-{/each}
-<!--<MovieContainer {movies} />-->
+<MovieContainer {movies} />
