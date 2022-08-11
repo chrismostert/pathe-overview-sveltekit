@@ -1,11 +1,13 @@
 <script>
 	export let movies;
-	import Ratings from './Ratings.svelte';
+	import Ratings from '$lib/components/Ratings.svelte';
+	import MovieInfo from '$lib/components/MovieInfo.svelte';
 </script>
 
 {#each movies as movie (movie.id)}
 	<div class="relative">
 		<div class="mb-1 p-4 shadow-md">
+			<!-- Title -->
 			<div class="mb-2">
 				<a
 					href={`https://www.pathe.nl/film/${movie.id}`}
@@ -13,7 +15,9 @@
 				>
 			</div>
 
+			<!-- Block element -->
 			<div class="flex">
+				<!-- Poster with rating -->
 				<div class="mr-4 shrink-0">
 					<img
 						src={movie.pathe.poster.includes('poster_missing.png')
@@ -27,9 +31,8 @@
 					{/if}
 				</div>
 
-				<div>
-					<p>{movie.pathe.description}</p>
-				</div>
+				<!-- Description with times -->
+				<MovieInfo {movie} />
 			</div>
 		</div>
 	</div>

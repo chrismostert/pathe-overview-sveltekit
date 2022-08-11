@@ -1,5 +1,5 @@
 <script context="module">
-    export const prerender = true;
+	export const prerender = true;
 </script>
 
 <h1>Welcome to <span class="text-6xl">SvelteKit</span></h1>

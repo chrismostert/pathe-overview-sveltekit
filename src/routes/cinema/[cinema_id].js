@@ -38,9 +38,7 @@ export async function GET({ params, url }) {
 	// Get RT ratings
 	let ratings = await Promise.all(
 		movielist.map((movie) =>
-			limit(() =>
-				fetch(`${url.origin}/api/rating/${movie.id}`).then((res) => res.json())
-			)
+			limit(() => fetch(`${url.origin}/api/rating/${movie.id}`).then((res) => res.json()))
 		)
 	);
 

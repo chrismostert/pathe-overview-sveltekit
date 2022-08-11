@@ -12,12 +12,12 @@ export async function GET({ params, url }) {
 		};
 	}
 
-    let info = await fetch(`${url.origin}/api/movie/${params.movie_id}`).then(
+	let info = await fetch(`${url.origin}/api/movie/${params.movie_id}`).then(
 		async (response) => await response.json()
 	);
 
-    let title_q = info.title;
-    let year_q = info.year;
+	let title_q = info.title;
+	let year_q = info.year;
 
 	let getScore = (hit) => {
 		return (
