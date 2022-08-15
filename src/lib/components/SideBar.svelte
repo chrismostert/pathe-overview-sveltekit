@@ -1,8 +1,12 @@
 <script>
+	import { navigating } from '$app/stores';
 	export let cinemas, selected;
 	let expanded = false;
 	let y = 0;
 	$: y, (expanded = false);
+	$: if ($navigating == null) {
+		expanded = false;
+	}
 </script>
 
 <svelte:window bind:scrollY={y} />
@@ -20,11 +24,13 @@
 >
 	<nav>
 		<h1 class="mb-2 text-2xl">Selecteer bioscoop</h1>
+		<ul>
 		{#each cinemas as cinema}
-			<div>
-				<a href={`/cinema/${cinema.cinema_id}`}>{cinema.cinema_name}</a>
-			</div>
+			<li>
+				<a sveltekit:prefetch href={`/cinema/${cinema.cinema_id}`}>{cinema.cinema_name}</a>
+			</li>
 		{/each}
+		</ul>
 	</nav>
 </div>
 
