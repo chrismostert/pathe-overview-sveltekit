@@ -1,7 +1,11 @@
 <script>
 	export let cinemas, selected;
 	let expanded = false;
+	let y = 0;
+	$: y, (expanded = false);
 </script>
+
+<svelte:window bind:scrollY={y} />
 
 <button on:click={() => (expanded = !expanded)} class="relative z-30 h-8 w-8">
 	<div class="absolute top-[20%] h-1 w-8 bg-black transition" class:scale-0={expanded} />
