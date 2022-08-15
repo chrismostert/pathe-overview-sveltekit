@@ -22,16 +22,12 @@
 
 <script>
 	import '../app.css';
-	import OptionBanner from '$lib/components/OptionBanner.svelte';
+	import Banner from '$lib/components/Banner.svelte';
 	export let cinemas, selected;
 </script>
 
 <div class="mx-auto max-w-4xl">
-	<OptionBanner {cinemas} {selected} />
-	{#each cinemas as cinema}
-		<a href={`/cinema/${cinema.cinema_id}`}>{cinema.cinema_name}</a>
-		<br />
-	{/each}
+	<Banner {cinemas} {selected} />
 	<main>
 		<slot />
 	</main>
