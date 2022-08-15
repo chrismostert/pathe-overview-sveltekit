@@ -1,10 +1,8 @@
-import { get as levenshtein } from 'fast-levenshtein';
+import levenshtein from 'fast-levenshtein';
 
-const TITLE_PARAM = 'title';
-const YEAR_PARAM = 'year';
 const RT_ENV_PARAM = 'VITE_RT_LINK';
 
-export async function GET({ url }) {
+export async function GET({ params, url }) {
 	if (import.meta.env[RT_ENV_PARAM] === undefined) {
 		return {
 			status: 500,
@@ -14,21 +12,17 @@ export async function GET({ url }) {
 		};
 	}
 
-	if (!(url.searchParams.has(TITLE_PARAM) && url.searchParams.has(YEAR_PARAM))) {
-		return {
-			status: 400,
-			body: {
-				error: 'Please include a title and year in your request!'
-			}
-		};
-	}
+	let info = await fetch(`${url.origin}/api/movie/${params.movie_id}`).then(
+		async (response) => await response.json()
+	);
 
-	const q_title = url.searchParams.get(TITLE_PARAM);
-	const q_year = url.searchParams.get(YEAR_PARAM);
+	let title_q = info.title;
+	let year_q = info.year;
 
 	let getScore = (hit) => {
 		return (
-			levenshtein(hit.title, q_title) + 0.1 * Math.abs(parseInt(hit.releaseYear) - parseInt(q_year))
+			levenshtein.get(hit.title, title_q) +
+			0.1 * Math.abs(parseInt(hit.releaseYear) - parseInt(year_q))
 		);
 	};
 
@@ -36,7 +30,7 @@ export async function GET({ url }) {
 		requests: [
 			{
 				indexName: 'content_rt',
-				query: q_title,
+				query: title_q,
 				params: 'filters=rtId%20%3E%200%20AND%20isEmsSearchable%20%3D%201&hitsPerPage=5'
 			}
 		]
@@ -61,7 +55,7 @@ export async function GET({ url }) {
 	}
 
 	let res = undefined;
-	if (levenshtein(best.title, q_title) < 5) {
+	if (levenshtein.get(best.title, title_q) < 5) {
 		res = {
 			id: best.rtId,
 			title: best.title,
@@ -75,6 +69,9 @@ export async function GET({ url }) {
 	}
 
 	return {
+		headers: {
+			'Cache-Control': 'max-age=1800, public'
+		},
 		body: res
 	};
 }

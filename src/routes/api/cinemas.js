@@ -18,6 +18,9 @@ export async function GET() {
 		});
 
 		return {
+			headers: {
+				'Cache-Control': 'max-age=1800, public'
+			},
 			body: {
 				cinemas: [...res].map(JSON.parse)
 			}

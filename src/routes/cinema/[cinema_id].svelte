@@ -1,15 +1,10 @@
 <script context="module">
-	export async function load({ params }) {
-		return {
-			props: {
-				cinema_id: params.cinema_id
-			}
-		};
-	}
+	export const prerender = true;
 </script>
 
 <script>
-	export let cinema_id;
+	import MovieContainer from '$lib/components/MovieContainer.svelte';
+	export let movies;
 </script>
 
-<h1>Hello {cinema_id}</h1>
+<MovieContainer {movies} />

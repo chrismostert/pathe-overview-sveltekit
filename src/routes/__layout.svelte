@@ -5,16 +5,14 @@
 		if (response.ok) {
 			return {
 				props: {
-					cinemas: (await response.json()).cinemas,
-					selected: params.cinema_id ? params.cinema_id : '0'
+					cinemas: (await response.json()).cinemas
 				}
 			};
 		}
 
 		return {
 			props: {
-				cinemas: [],
-				selected: '0'
+				cinemas: []
 			}
 		};
 	}
@@ -22,12 +20,18 @@
 
 <script>
 	import '../app.css';
-	import OptionBanner from '$lib/components/OptionBanner.svelte';
-	export let cinemas, selected;
+	import Banner from '$lib/components/Banner.svelte';
+	import { ypos } from '$lib/store.js';
+	export let cinemas;
+	let y;
+
+	$: $ypos = y;
 </script>
 
+<svelte:window bind:scrollY={y} />
+
 <div class="mx-auto max-w-4xl">
-	<OptionBanner {cinemas} {selected} />
+	<Banner {cinemas} />
 	<main>
 		<slot />
 	</main>
