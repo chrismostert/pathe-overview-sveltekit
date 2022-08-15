@@ -2,6 +2,7 @@ import { load } from 'cheerio';
 
 export async function GET() {
 	try {
+		console.log('Fetching movies');
 		let pagenum = 1;
 		let movies = [];
 

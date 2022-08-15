@@ -2,6 +2,7 @@ import { load } from 'cheerio';
 
 export async function GET({ params }) {
 	try {
+		console.log(`Fetching movie info for ${params.movie_id}`);
 		let page = await fetch(`https://www.pathe.nl/film/${params.movie_id}`);
 		let cont = await page.text();
 		let $ = load(cont);

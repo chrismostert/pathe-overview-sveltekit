@@ -3,7 +3,7 @@
 	import { ypos } from '$lib/store.js';
 	export let cinemas;
 
-	let show
+	let show;
 	let yprev = 0;
 
 	$: {
