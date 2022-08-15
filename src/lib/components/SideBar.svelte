@@ -1,15 +1,15 @@
 <script>
 	import { navigating } from '$app/stores';
+	import { ypos } from '$lib/store.js';
+
 	export let cinemas;
 	let expanded = false;
-	let y = 0;
-	$: y, (expanded = false);
+
+	$: $ypos, (expanded = false);
 	$: if ($navigating == null) {
 		expanded = false;
 	}
 </script>
-
-<svelte:window bind:scrollY={y} />
 
 <button on:click={() => (expanded = !expanded)} class="relative z-30 mr-4 h-8 w-8">
 	<div class="absolute top-[20%] h-1 w-8 bg-black transition" class:scale-0={expanded} />
