@@ -5,16 +5,14 @@
 		if (response.ok) {
 			return {
 				props: {
-					cinemas: (await response.json()).cinemas,
-					selected: params.cinema_id ? params.cinema_id : '0'
+					cinemas: (await response.json()).cinemas
 				}
 			};
 		}
 
 		return {
 			props: {
-				cinemas: [],
-				selected: '0'
+				cinemas: []
 			}
 		};
 	}
@@ -23,11 +21,11 @@
 <script>
 	import '../app.css';
 	import Banner from '$lib/components/Banner.svelte';
-	export let cinemas, selected;
+	export let cinemas;
 </script>
 
 <div class="mx-auto max-w-4xl">
-	<Banner {cinemas} {selected} />
+	<Banner {cinemas} />
 	<main>
 		<slot />
 	</main>
