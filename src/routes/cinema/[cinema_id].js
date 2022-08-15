@@ -1,9 +1,10 @@
 import pLimit from 'p-limit';
-const limit = pLimit(5);
+import pRetry from 'p-retry';
+const limit = pLimit(20);
 
 export async function GET({ params, url }) {
 	// Get master list of movies
-	let movielist = await fetch(`${url.origin}/api/movies`).then(
+	let movielist = await pRetry(() => fetch(`${url.origin}/api/movies`)).then(
 		async (response) => await response.json()
 	);
 
@@ -11,7 +12,7 @@ export async function GET({ params, url }) {
 	let times = await Promise.all(
 		movielist.movies.map((movie) =>
 			limit(() =>
-				fetch(`${url.origin}/api/times/${movie.id}/${params.cinema_id}`).then((res) => res.json())
+				pRetry(() => fetch(`${url.origin}/api/times/${movie.id}/${params.cinema_id}`)).then((res) => res.json())
 			)
 		)
 	);
@@ -31,14 +32,14 @@ export async function GET({ params, url }) {
 	// Get pathe info (including year)
 	let info = await Promise.all(
 		movielist.map((movie) =>
-			limit(() => fetch(`${url.origin}/api/movie/${movie.id}`).then((res) => res.json()))
+			limit(() => pRetry(() => fetch(`${url.origin}/api/movie/${movie.id}`)).then((res) => res.json()))
 		)
 	);
 
 	// Get RT ratings
 	let ratings = await Promise.all(
 		movielist.map((movie) =>
-			limit(() => fetch(`${url.origin}/api/rating/${movie.id}`).then((res) => res.json()))
+			limit(() => pRetry(() => fetch(`${url.origin}/api/rating/${movie.id}`)).then((res) => res.json()))
 		)
 	);
 
