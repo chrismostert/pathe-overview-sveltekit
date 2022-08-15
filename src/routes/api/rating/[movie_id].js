@@ -12,8 +12,6 @@ export async function GET({ params, url }) {
 		};
 	}
 
-	console.log(`Fetching rating for ${params.movie_id}`);
-
 	let info = await fetch(`${url.origin}/api/movie/${params.movie_id}`).then(
 		async (response) => await response.json()
 	);

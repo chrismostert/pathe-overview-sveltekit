@@ -2,7 +2,6 @@ import { load } from 'cheerio';
 
 export async function GET() {
 	try {
-		console.log('Fetching cinemas');
 		let page = await fetch('https://www.pathe.nl/bioscoopagenda');
 		let cont = await page.text();
 		let $ = load(cont);
