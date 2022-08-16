@@ -1,0 +1,13 @@
+name: Trigger Site Rebuild on a CRON Schedule
+
+on:
+  schedule:
+    - cron: '50 * * * *'
+jobs:
+  build:
+    name: Trigger Site Rebuild
+    runs-on: ubuntu-latest
+    steps:
+      - name: cURL request
+        # Hit the webhook endpoint to rebuild  from the "main" branch
+        run: curl -X POST -d {} ${{ secrets.WEBHOOK_REBUILD_URL }}
