@@ -49,6 +49,7 @@ export async function GET({ params, url }) {
 		)
 	);
 
+	// Combine object
 	movielist = movielist.map((movie, i) => {
 		movie.pathe = info[i];
 		movie.rt = ratings[i];
