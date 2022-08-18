@@ -20,7 +20,7 @@
 
 	<!-- Date/times -->
 	{#key $page.params.cinema_id}
-		<div class="mt-2" transition:slide>
+		<div class="mt-2" in:slide>
 			{#each movie.times as datetime}
 				<p class="font-medium">{datetime.day}</p>
 				<div class="flex flex-wrap">
