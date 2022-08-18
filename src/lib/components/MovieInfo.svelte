@@ -1,5 +1,7 @@
 <script>
 	export let movie;
+	import { page } from '$app/stores';
+	import { slide } from 'svelte/transition';
 
 	let get_color = (label) => {
 		if (label == '2D') {
@@ -17,20 +19,22 @@
 	<p>{movie.pathe.description}</p>
 
 	<!-- Date/times -->
-	<div class="mt-2">
-		{#each movie.times as datetime}
-			<p class="font-medium">{datetime.day}</p>
-			<div class="flex flex-wrap">
-				{#each datetime.times as time}
-					<div
-						class="mr-1 mb-2 inline-block rounded-md px-1.5 text-center text-sm {get_color(
-							time.label
-						)}"
-					>
-						{time.start} – {time.end} ({time.label})
-					</div>
-				{/each}
-			</div>
-		{/each}
-	</div>
+	{#key $page.params.cinema_id}
+		<div class="mt-2" transition:slide>
+			{#each movie.times as datetime}
+				<p class="font-medium">{datetime.day}</p>
+				<div class="flex flex-wrap">
+					{#each datetime.times as time}
+						<div
+							class="mr-1 mb-2 inline-block rounded-md px-1.5 text-center text-sm {get_color(
+								time.label
+							)}"
+						>
+							{time.start} – {time.end} ({time.label})
+						</div>
+					{/each}
+				</div>
+			{/each}
+		</div>
+	{/key}
 </div>

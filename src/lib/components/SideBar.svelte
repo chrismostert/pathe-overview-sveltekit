@@ -19,7 +19,7 @@
 </button>
 
 <div
-	class="absolute top-0 left-0 z-20 h-screen -translate-x-[105%] overflow-y-auto bg-white px-20 py-4 shadow-md transition"
+	class="absolute top-0 left-0 z-20 h-screen -translate-x-[105%] overflow-y-auto bg-white px-20 pt-4 pb-20 shadow-md transition"
 	class:translate-x-0={expanded}
 >
 	<nav>
