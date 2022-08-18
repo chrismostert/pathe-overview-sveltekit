@@ -19,15 +19,17 @@
 </button>
 
 <div
-	class="absolute top-0 left-0 z-20 h-screen -translate-x-[105%] overflow-y-auto bg-white p-12 px-16 shadow-md transition"
+	class="absolute top-0 left-0 z-20 h-screen -translate-x-[105%] overflow-y-auto bg-white px-20 pt-4 pb-20 shadow-md transition"
 	class:translate-x-0={expanded}
 >
 	<nav>
-		<h1 class="mb-2 text-2xl">Selecteer bioscoop</h1>
+		<h1 class="mb-2 text-2xl">Selecteer bioscoop:</h1>
 		<ul>
 			{#each cinemas as cinema}
-				<li>
-					<a sveltekit:prefetch href={`/cinema/${cinema.cinema_id}`}>{cinema.cinema_name}</a>
+				<li class="mt-1 first:mt-0">
+					<a sveltekit:prefetch class="text-lg" href={`/cinema/${cinema.cinema_id}`}
+						>{cinema.cinema_name}</a
+					>
 				</li>
 			{/each}
 		</ul>
