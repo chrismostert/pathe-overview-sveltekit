@@ -2,7 +2,7 @@
 	import { navigating } from '$app/stores';
 	import { ypos } from '$lib/store.js';
 
-	export let cinemas;
+	export let data;
 	let expanded = false;
 
 	$: $ypos, (expanded = false);
@@ -25,7 +25,7 @@
 	<nav>
 		<h1 class="mb-2 text-2xl">Selecteer bioscoop:</h1>
 		<ul>
-			{#each cinemas as cinema}
+			{#each data.cinemas as cinema}
 				<li class="mt-1 first:mt-0">
 					<a sveltekit:prefetch class="text-lg" href={`/cinema/${cinema.cinema_id}`}
 						>{cinema.cinema_name}</a
