@@ -1,3 +1,4 @@
+import { json, error } from '@sveltejs/kit';
 import { load } from 'cheerio';
 
 export async function GET() {
@@ -17,20 +18,14 @@ export async function GET() {
 			);
 		});
 
-		return {
+		return json({
+			cinemas: [...res].map(JSON.parse)
+		}, {
 			headers: {
 				'Cache-Control': 'max-age=1800, public'
-			},
-			body: {
-				cinemas: [...res].map(JSON.parse)
 			}
-		};
+		});
 	} catch (_) {
-		return {
-			status: 500,
-			body: {
-				cinemas: []
-			}
-		};
+		throw error(500, "Unable to fetch cinemas.")
 	}
 }

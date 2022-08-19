@@ -2,7 +2,7 @@ import pLimit from 'p-limit';
 import pRetry from 'p-retry';
 const limit = pLimit(5);
 
-export async function GET({ params, url }) {
+export async function load({ params, url }) {
 	// Get master list of movies
 	let movielist = await pRetry(() => fetch(`${url.origin}/api/movies`)).then(
 		async (response) => await response.json()
@@ -57,8 +57,6 @@ export async function GET({ params, url }) {
 	});
 
 	return {
-		body: {
-			movies: movielist
-		}
+		movies: movielist
 	};
 }

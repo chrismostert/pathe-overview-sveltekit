@@ -1,3 +1,4 @@
+import { json, error } from '@sveltejs/kit';
 import { load } from 'cheerio';
 
 export async function GET() {
@@ -23,18 +24,14 @@ export async function GET() {
 			pagenum += 1;
 		}
 
-		return {
+		return json({
+			movies
+		}, {
 			headers: {
 				'Cache-Control': 'max-age=1800, public'
-			},
-			body: {
-				movies
 			}
-		};
+		});
 	} catch (_) {
-		return {
-			status: 500,
-			movies: []
-		};
+		throw error(500, "Unable to fetch playing movies.");
 	}
 }
