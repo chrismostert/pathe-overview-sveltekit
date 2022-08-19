@@ -11,7 +11,7 @@
 <svelte:window bind:scrollY={y} />
 
 <div class="mx-auto max-w-4xl">
-	<Banner {data} />
+	<Banner cinemas={data.cinemas} />
 	<main>
 		<slot />
 	</main>

@@ -1,6 +1,5 @@
 <script>
-	export let data;
-	let movies;
+	export let movies;
 	import Ratings from '$lib/components/Ratings.svelte';
 	import MovieInfo from '$lib/components/MovieInfo.svelte';
 
@@ -10,7 +9,7 @@
 
 	$: {
 		let field = $sort_by_audience ? 'audienceScore' : 'criticsScore';
-		movies = data.movies.sort((a, b) => {
+		movies = movies.sort((a, b) => {
 			let score_a = a?.rt?.scores?.[field] || 0;
 			let score_b = b?.rt?.scores?.[field] || 0;
 			return score_b - score_a;
