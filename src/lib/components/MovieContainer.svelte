@@ -2,10 +2,12 @@
 	export let movies;
 	import Ratings from '$lib/components/Ratings.svelte';
 	import MovieInfo from '$lib/components/MovieInfo.svelte';
-
 	import { flip } from 'svelte/animate';
+	import { sort_by_audience, hidden_movies, only_today } from '$lib/store.js';
 
-	import { sort_by_audience, hidden_movies } from '$lib/store.js';
+	let plays_today = (movie) => {
+		return movie.times.find((time) => time.day == 'Vandaag');
+	};
 
 	$: {
 		let field = $sort_by_audience ? 'audienceScore' : 'criticsScore';
@@ -19,7 +21,7 @@
 
 {#each movies as movie (movie.id)}
 	<div animate:flip={{ duration: 500 }} class="relative">
-		{#if !$hidden_movies[movie.id]}
+		{#if !$hidden_movies[movie.id] && (!$only_today || plays_today(movie))}
 			<div class="mb-1 p-4 shadow-md">
 				<!-- Hide button-->
 				<button

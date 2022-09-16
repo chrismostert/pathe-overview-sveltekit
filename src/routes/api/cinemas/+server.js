@@ -8,12 +8,11 @@ export async function GET() {
 		let $ = load(cont);
 
 		let res = new Set();
-		$('.filter__input-list li').each((_, elem) => {
-			let cinema_elem = $(elem).find('.cinema.checkbox');
+		$('.js-cinema-filter-checkbox, .city.cinema.checkbox').each((_, elem) => {
 			res.add(
 				JSON.stringify({
-					cinema_name: cinema_elem.attr('data-show-value'),
-					cinema_id: cinema_elem.attr('value')
+					cinema_name: elem.attribs['data-show-value'],
+					cinema_id: elem.attribs['value']
 				})
 			);
 		});

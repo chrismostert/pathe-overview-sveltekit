@@ -1,6 +1,6 @@
 <script>
 	import SideBar from '$lib/components/SideBar.svelte';
-	import { ypos, sort_by_audience } from '$lib/store.js';
+	import { ypos, sort_by_audience, only_today } from '$lib/store.js';
 	export let cinemas;
 
 	let show;
@@ -13,13 +13,13 @@
 </script>
 
 <div class="sticky top-0 z-10 origin-top bg-white transition {show ? 'scale-y-100' : 'scale-y-0'}">
-	<div class="relative mb-1 flex items-center overflow-x-clip py-4 px-4 shadow-md">
+	<div class="relative mb-1 flex flex-wrap items-center overflow-x-clip py-4 px-4 shadow-md">
 		<SideBar {cinemas} />
 
 		<a href="/" class="mr-2"><h1 class="text-lg">Pathé movie overview 🍿</h1></a>
 
 		<div class="flex text-sm">
-			<div class="mb-2 pt-1">Sort by:</div>
+			<div class="mb-2 pt-1">Sorteren op:</div>
 			<button
 				on:click={() => {
 					$sort_by_audience = false;
@@ -39,6 +39,11 @@
 					: 'bg-gray-100 text-black hover:bg-gray-300'} mr-2 mb-2 rounded-r-md px-1.5"
 				>Audience</button
 			>
+		</div>
+
+		<div>
+			<input type="checkbox" id="filter-today" bind:checked={$only_today} />
+			<label for="filter-today">Speelt vandaag</label>
 		</div>
 	</div>
 </div>
