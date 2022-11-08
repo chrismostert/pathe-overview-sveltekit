@@ -1,2 +1,11 @@
-<h1>Welcome to <span class="text-6xl">SvelteKit</span></h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+	export let data;
+</script>
+
+{#each data.cinemas as cinema}
+	<div>
+		<a sveltekit:prefetch class="text-lg" href={`/cinema/${cinema.cinema_id}`}
+			>{cinema.cinema_name}</a
+		>
+	</div>
+{/each}
