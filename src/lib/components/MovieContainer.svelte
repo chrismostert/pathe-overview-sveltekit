@@ -42,6 +42,7 @@
 						<a
 							href={`https://www.pathe.nl/film/${movie.id}`}
 							class="text-xl font-bold text-cyan-700 hover:text-cyan-900"
+							rel="external"
 							>{movie.pathe.title_visual}</a
 						>
 					</div>
