@@ -4,7 +4,7 @@
 
 {#if rt.vanity}
 	<div>
-		<a href={`https://www.rottentomatoes.com/m/${rt.vanity}`}>
+		<a href={`https://www.rottentomatoes.com/m/${rt.vanity}`} rel="external">
 			<div class="grid grid-cols-2 items-center justify-items-center">
 				<div class="flex items-center">
 					{#if rt.scores && rt.scores.criticsIconUrl}
