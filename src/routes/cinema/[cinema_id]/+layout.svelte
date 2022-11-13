@@ -1,13 +1,10 @@
 <script>
 	import Banner from '$lib/components/Banner.svelte';
-	import { ypos } from '$lib/store.js';
+	import { ypos, window_width } from '$lib/store.js';
 	export let data;
-	let y;
-
-	$: $ypos = y;
 </script>
 
-<svelte:window bind:scrollY={y} />
+<svelte:window bind:scrollY={$ypos} bind:innerWidth={$window_width} />
 
 <Banner cinemas={data.cinemas} />
 <slot />
