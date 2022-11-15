@@ -1,8 +1,6 @@
 <script>
 	export let movie;
-	import { page } from '$app/stores';
 	import { window_width } from '$lib/store.js';
-	import { slide } from 'svelte/transition';
 
 	let get_color = (label) => {
 		if (label == '2D') {
@@ -35,24 +33,22 @@
 		class="overflow-hidden transition-all duration-500"
 		style={expanded ? `max-height: ${date_height}px` : `max-height: ${START_HEIGHT}px`}
 	>
-		{#key $page.params.cinema_id}
-			<div class="mt-2" in:slide>
-				{#each movie.times as datetime}
-					<p class="font-medium">{datetime.day}</p>
-					<div class="flex flex-wrap">
-						{#each datetime.times as time}
-							<div
-								class="mr-1 mb-2 inline-block rounded-md px-1.5 text-center text-sm {get_color(
-									time.label
-								)}"
-							>
-								{time.start} – {time.end} ({time.label})
-							</div>
-						{/each}
-					</div>
-				{/each}
-			</div>
-		{/key}
+		<div class="mt-2">
+			{#each movie.times as datetime}
+				<p class="font-medium">{datetime.day}</p>
+				<div class="flex flex-wrap">
+					{#each datetime.times as time}
+						<div
+							class="mr-1 mb-2 inline-block rounded-md px-1.5 text-center text-sm {get_color(
+								time.label
+							)}"
+						>
+							{time.start} – {time.end} ({time.label})
+						</div>
+					{/each}
+				</div>
+			{/each}
+		</div>
 	</div>
 
 	<!-- Expand button -->

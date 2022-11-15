@@ -33,6 +33,9 @@ export async function GET({ params }) {
 			}
 		});
 	} catch (_) {
-		throw error(500, `Unable to fetch times for movie ${params.movie_id} in cinema ${params.cinema_id}`);
+		throw error(
+			500,
+			`Unable to fetch times for movie ${params.movie_id} in cinema ${params.cinema_id}`
+		);
 	}
 }

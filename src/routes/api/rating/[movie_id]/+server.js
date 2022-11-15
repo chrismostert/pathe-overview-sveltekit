@@ -5,7 +5,10 @@ const RT_ENV_PARAM = 'VITE_RT_LINK';
 
 export async function GET({ params, url }) {
 	if (import.meta.env[RT_ENV_PARAM] === undefined) {
-		throw new error(500, `${RT_ENV_PARAM} has not been set as an environment variable. Rotten Tomatoes score lookup will not work without this link being set.`)
+		throw new error(
+			500,
+			`${RT_ENV_PARAM} has not been set as an environment variable. Rotten Tomatoes score lookup will not work without this link being set.`
+		);
 	}
 
 	try {
@@ -71,6 +74,6 @@ export async function GET({ params, url }) {
 			}
 		});
 	} catch (_) {
-		throw error(500, `Unable to fetch RT ratings for ${params.movie_id}`)
+		throw error(500, `Unable to fetch RT ratings for ${params.movie_id}`);
 	}
 }

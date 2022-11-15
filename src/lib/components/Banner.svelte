@@ -17,8 +17,8 @@
 		class="relative mb-1 flex flex-wrap items-center justify-between gap-y-2 gap-x-2 overflow-x-clip py-4 px-4 shadow-md"
 	>
 		<div class="flex items-center">
-		<SideBar {cinemas} />
-		<a class="text-xl font-medium" href="/" sveltekit:prefetch>🍿 Pathé overview</a>
+			<SideBar {cinemas} />
+			<a class="text-xl font-medium" href="/" sveltekit:prefetch>🍿 Pathé overview</a>
 		</div>
 
 		<div class="flex flex-wrap gap-x-2">

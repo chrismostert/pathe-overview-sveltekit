@@ -17,14 +17,17 @@ export async function GET() {
 			);
 		});
 
-		return json({
-			cinemas: [...res].map(JSON.parse)
-		}, {
-			headers: {
-				'Cache-Control': 'max-age=1800, public'
+		return json(
+			{
+				cinemas: [...res].map(JSON.parse)
+			},
+			{
+				headers: {
+					'Cache-Control': 'max-age=1800, public'
+				}
 			}
-		});
+		);
 	} catch (_) {
-		throw error(500, "Unable to fetch cinemas.")
+		throw error(500, 'Unable to fetch cinemas.');
 	}
 }

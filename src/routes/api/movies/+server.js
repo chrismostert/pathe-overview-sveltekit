@@ -24,14 +24,17 @@ export async function GET() {
 			pagenum += 1;
 		}
 
-		return json({
-			movies
-		}, {
-			headers: {
-				'Cache-Control': 'max-age=1800, public'
+		return json(
+			{
+				movies
+			},
+			{
+				headers: {
+					'Cache-Control': 'max-age=1800, public'
+				}
 			}
-		});
+		);
 	} catch (_) {
-		throw error(500, "Unable to fetch playing movies.");
+		throw error(500, 'Unable to fetch playing movies.');
 	}
 }

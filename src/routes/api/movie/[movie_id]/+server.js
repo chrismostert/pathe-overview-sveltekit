@@ -16,17 +16,20 @@ export async function GET({ params }) {
 		let description = $("span[itemprop = 'description'] p").text().replace(' Lees meer', '').trim();
 		let poster = $('.visual-movie__poster img').attr('src');
 
-		return json({
-			title_visual,
-			title,
-			year,
-			description,
-			poster
-		}, {
-			headers: {
-				'Cache-Control': 'max-age=1800, public'
+		return json(
+			{
+				title_visual,
+				title,
+				year,
+				description,
+				poster
+			},
+			{
+				headers: {
+					'Cache-Control': 'max-age=1800, public'
+				}
 			}
-		});
+		);
 	} catch (_) {
 		throw error(500, `Unable to fetch movie info for pathe movie ${params.movie_id}`);
 	}

@@ -4,7 +4,7 @@ const limit = pLimit(2);
 
 export async function load({ params, url }) {
 	// Get master list of movies
-	let movielist = await pRetry(() => fetch(`${url.origin}/api/movies`), {retries: 10}).then(
+	let movielist = await pRetry(() => fetch(`${url.origin}/api/movies`), { retries: 10 }).then(
 		async (response) => await response.json()
 	);
 
@@ -12,9 +12,9 @@ export async function load({ params, url }) {
 	let times = await Promise.all(
 		movielist.movies.map((movie) =>
 			limit(() =>
-				pRetry(() => fetch(`${url.origin}/api/times/${movie.id}/${params.cinema_id}`), {retries: 10}).then((res) =>
-					res.json()
-				)
+				pRetry(() => fetch(`${url.origin}/api/times/${movie.id}/${params.cinema_id}`), {
+					retries: 10
+				}).then((res) => res.json())
 			)
 		)
 	);
@@ -35,7 +35,9 @@ export async function load({ params, url }) {
 	let info = await Promise.all(
 		movielist.map((movie) =>
 			limit(() =>
-				pRetry(() => fetch(`${url.origin}/api/movie/${movie.id}`), {retries: 10}).then((res) => res.json())
+				pRetry(() => fetch(`${url.origin}/api/movie/${movie.id}`), { retries: 10 }).then((res) =>
+					res.json()
+				)
 			)
 		)
 	);
@@ -44,7 +46,9 @@ export async function load({ params, url }) {
 	let ratings = await Promise.all(
 		movielist.map((movie) =>
 			limit(() =>
-				pRetry(() => fetch(`${url.origin}/api/rating/${movie.id}`), {retries: 10}).then((res) => res.json())
+				pRetry(() => fetch(`${url.origin}/api/rating/${movie.id}`), { retries: 10 }).then((res) =>
+					res.json()
+				)
 			)
 		)
 	);
