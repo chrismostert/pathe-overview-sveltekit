@@ -1,5 +1,5 @@
-export async function load({ fetch }) {
-	let response = await fetch('/api/cinemas');
+export async function load({ url }) {
+	let response = await fetch(`${url.origin}/api/cinemas`);
 
 	if (response.ok) {
 		return {

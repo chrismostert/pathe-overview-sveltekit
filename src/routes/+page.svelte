@@ -5,19 +5,21 @@
 <div class="mb-4">
 	<div class="mb-4 p-4 shadow-md">
 		<h1 class="mt-2 mb-4 text-4xl font-semibold">🍿 Pathé overview</h1>
-		<h2 class="mb-2 text-lg font-medium">
+		<h2 class="mb-2 text-lg">
 			Alle ingeplande films bij jouw lokale bioscoop. Inclusief draaitijden én Rotten Tomatoes
 			score.
 		</h2>
-		<h2 class="text-lg font-medium">Zo mis je nooit meer een goede film!</h2>
+		<h2 class="text-lg">Zo mis je nooit meer een goede film!</h2>
 	</div>
 
 	<div class="mb-4 p-4 shadow-md">
-		<h1 class="mb-2 text-2xl font-semibold">Kies jouw bioscoop:</h1>
+		<h1 class="mb-2 text-2xl font-semibold">Kies jouw bioscoop</h1>
 		<div class="grid grid-cols-2 gap-x-2 gap-y-2">
 			{#each data.cinemas as cinema}
-				<a sveltekit:prefetch class="text-md p-2 shadow-sm" href={`/cinema/${cinema.cinema_id}`}
-					>{cinema.cinema_name}</a
+				<a
+					sveltekit:prefetch
+					class="text-md p-2 shadow-sm transition-colors hover:bg-gray-100"
+					href={`/cinema/${cinema.cinema_id}`}>{cinema.cinema_name}</a
 				>
 			{/each}
 		</div>
