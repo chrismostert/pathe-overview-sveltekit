@@ -1,6 +1,6 @@
 import pLimit from 'p-limit';
 import pRetry from 'p-retry';
-const limit = pLimit(5);
+const limit = pLimit(2);
 
 const fetch_with_retry = async (fetch_fn, url) => {
 	let response = await fetch_fn(url);
