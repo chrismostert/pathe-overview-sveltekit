@@ -2,6 +2,7 @@ import { json, error } from '@sveltejs/kit';
 import { load } from 'cheerio';
 
 export async function GET() {
+	console.log(`Fetching movie list...`)
 	try {
 		let pagenum = 1;
 		let movies = [];
