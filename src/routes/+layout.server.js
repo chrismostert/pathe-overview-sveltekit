@@ -1,5 +1,6 @@
+export const prerender = true;
 export async function load({ fetch }) {
-	let response = await fetch('/api/cinemas');
+	let response = await fetch(`/api/cinemas`);
 
 	if (response.ok) {
 		return {

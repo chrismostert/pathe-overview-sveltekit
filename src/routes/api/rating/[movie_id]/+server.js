@@ -3,7 +3,8 @@ import levenshtein from 'fast-levenshtein';
 
 const RT_ENV_PARAM = 'VITE_RT_LINK';
 
-export async function GET({ params, url }) {
+export async function GET({ fetch, params }) {
+	console.log(`Fetching RT rating for ${params.movie_id}...`)
 	if (import.meta.env[RT_ENV_PARAM] === undefined) {
 		throw new error(
 			500,
@@ -12,7 +13,7 @@ export async function GET({ params, url }) {
 	}
 
 	try {
-		let info = await fetch(`${url.origin}/api/movie/${params.movie_id}`).then(
+		let info = await fetch(`/api/movie/${params.movie_id}`).then(
 			async (response) => await response.json()
 		);
 

@@ -1,7 +1,7 @@
 <script>
 	import SideBar from '$lib/components/SideBar.svelte';
 	import { ypos, sort_by_audience, only_today } from '$lib/store.js';
-	export let cinemas;
+	export let cinemas, selected_cinema;
 
 	let show;
 	let yprev = 0;
@@ -18,7 +18,7 @@
 	>
 		<div class="flex items-center">
 			<SideBar {cinemas} />
-			<a class="text-xl font-medium" href="/" sveltekit:prefetch>🍿 Pathé overview</a>
+			<a class="text-xl" href="/" sveltekit:prefetch>🍿 {selected_cinema}</a>
 		</div>
 
 		<div class="flex flex-wrap gap-x-2">
