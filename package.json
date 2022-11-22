@@ -30,6 +30,7 @@
 	"dependencies": {
 		"cheerio": "^1.0.0-rc.12",
 		"fast-levenshtein": "^3.0.0",
+		"fast-memoize": "^2.5.2",
 		"p-limit": "^4.0.0",
 		"p-retry": "^5.1.1",
 		"svelte-local-storage-store": "^0.3.1"

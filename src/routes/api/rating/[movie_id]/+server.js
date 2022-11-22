@@ -1,5 +1,6 @@
 import { json, error } from '@sveltejs/kit';
 import levenshtein from 'fast-levenshtein';
+import get_movie from '$lib/api/movie.js';
 
 const RT_ENV_PARAM = 'VITE_RT_LINK';
 
@@ -13,9 +14,7 @@ export async function GET({ fetch, params }) {
 	}
 
 	try {
-		let info = await fetch(`/api/movie/${params.movie_id}`).then(
-			async (response) => await response.json()
-		);
+		let info = await get_movie(params.movie_id);
 
 		let title_q = info.title;
 		let year_q = info.year;

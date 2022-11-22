@@ -1,5 +1,6 @@
 import pLimit from 'p-limit';
 import pRetry from 'p-retry';
+import get_movie from '$lib/api/movie.js';
 const limit = pLimit(2);
 
 const fetch_with_retry = async (fetch_fn, url) => {
@@ -42,7 +43,7 @@ export async function load({ fetch, params }) {
 	// Get pathe info (including year)
 	let info = await Promise.all(
 		movielist.map((movie) =>
-			limit(() => pRetry(() => fetch_with_retry(fetch, `/api/movie/${movie.id}`)))
+			limit(() => get_movie(movie.id))
 		)
 	);
 
