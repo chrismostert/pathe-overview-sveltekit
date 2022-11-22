@@ -27,7 +27,7 @@
 		<ul>
 			{#each cinemas as cinema}
 				<li class="mt-1 first:mt-0">
-					<a sveltekit:prefetch class="text-lg" href={`/cinema/${cinema.cinema_id}`}
+					<a data-sveltekit-prefetch class="text-lg" href={`/cinema/${cinema.cinema_id}`}
 						>{cinema.cinema_name}</a
 					>
 				</li>

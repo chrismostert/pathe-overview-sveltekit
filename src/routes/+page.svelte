@@ -21,7 +21,7 @@
 		<div class="grid grid-cols-2 gap-x-2 gap-y-2">
 			{#each data.cinemas as cinema}
 				<a
-					sveltekit:prefetch
+					data-sveltekit-prefetch
 					class="text-md p-2 shadow-sm transition-colors hover:bg-gray-100"
 					href={`/cinema/${cinema.cinema_id}`}>{cinema.cinema_name}</a
 				>
