@@ -2,7 +2,7 @@ import { json, error } from '@sveltejs/kit';
 import { load } from 'cheerio';
 
 export async function GET({ params }) {
-	console.log(`Fetching times for ${params.movie_id} at cinema ${params.cinema_id}...`)
+	console.log(`Fetching times for ${params.movie_id} at cinema ${params.cinema_id}...`);
 	try {
 		let page = await fetch(
 			`https://www.pathe.nl/film/${params.movie_id}/agenda?cinemas=${params.cinema_id}`

@@ -11,12 +11,10 @@ const fetch_with_retry = async (fetch_fn, url) => {
 };
 
 export async function load({ fetch, params }) {
-	console.log(`Begin fetching ${params.cinema_id}...`)
+	console.log(`Begin fetching ${params.cinema_id}...`);
 
 	// Get master list of movies
 	let movielist = await pRetry(() => fetch_with_retry(fetch, '/api/movies'));
-
-
 
 	// Get times for each movie
 	let times = await Promise.all(
@@ -27,7 +25,7 @@ export async function load({ fetch, params }) {
 		)
 	);
 
-	console.log(`Got all times for ${params.cinema_id}...`)
+	console.log(`Got all times for ${params.cinema_id}...`);
 
 	// Add times to the object and filter out movies without any playtimes
 	movielist = movielist.movies.reduce((prev, cur, i) => {
@@ -62,7 +60,7 @@ export async function load({ fetch, params }) {
 		return movie;
 	});
 
-	console.log(`Done fetching ${params.cinema_id}...`)
+	console.log(`Done fetching ${params.cinema_id}...`);
 
 	return {
 		movies: movielist

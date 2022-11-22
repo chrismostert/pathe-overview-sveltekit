@@ -2,6 +2,10 @@
 	export let data;
 </script>
 
+<svelte:head>
+	<title>Pathé overview</title>
+</svelte:head>
+
 <div class="mb-4">
 	<div class="mb-4 p-4 shadow-md">
 		<h1 class="mt-2 mb-4 text-4xl font-semibold">🍿 Pathé overview</h1>

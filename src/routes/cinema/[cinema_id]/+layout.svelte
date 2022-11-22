@@ -10,6 +10,9 @@
 		?.cinema_name;
 </script>
 
+<svelte:head>
+	<title>{selected_cinema || FALLBACK_NAME} | Pathé overview</title>
+</svelte:head>
 <svelte:window bind:scrollY={$ypos} bind:innerWidth={$window_width} />
 
 <Banner cinemas={data.cinemas} selected_cinema={selected_cinema || FALLBACK_NAME} />

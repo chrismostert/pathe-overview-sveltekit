@@ -2,7 +2,7 @@ import { json, error } from '@sveltejs/kit';
 import { load } from 'cheerio';
 
 export async function GET() {
-	console.log(`Fetching cinema list...`)
+	console.log(`Fetching cinema list...`);
 	try {
 		let page = await fetch('https://www.pathe.nl/bioscoopagenda');
 		let cont = await page.text();
