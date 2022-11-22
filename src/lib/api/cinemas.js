@@ -4,7 +4,6 @@ import pRetry from 'p-retry';
 import memoize from 'fast-memoize';
 
 export default memoize(async () => {
-	console.log(`Fetching cinema list...`);
 	let page = await pRetry(() => fetch_page('https://www.pathe.nl/bioscoopagenda'));
 	let cont = await page.text();
 	let $ = load(cont);
