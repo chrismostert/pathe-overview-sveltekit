@@ -1,14 +1,8 @@
+import get_cinemas from '$lib/api/cinemas.js';
+
 export const prerender = true;
-export async function load({ fetch }) {
-	let response = await fetch(`/api/cinemas`);
-
-	if (response.ok) {
-		return {
-			cinemas: (await response.json()).cinemas
-		};
-	}
-
+export async function load() {
 	return {
-		cinemas: []
+		cinemas: await get_cinemas()
 	};
 }
