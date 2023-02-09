@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { writable as writeable_persistent } from 'svelte-local-storage-store';
+import { persisted as writeable_persistent } from 'svelte-local-storage-store';
 
 let HIDDEN_MOVIES_STORAGE_KEY = 'pathe_hidden_movies';
 
