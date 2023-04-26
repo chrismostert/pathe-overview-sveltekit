@@ -44,6 +44,11 @@ export default memoize(async (movie_id) => {
 	);
 	let hits = result.results[0].hits;
 
+	// No hits, can not return any rating
+	if (hits.length == 0) {
+		return {};
+	}
+
 	let bestScore = Infinity;
 	let best = null;
 
