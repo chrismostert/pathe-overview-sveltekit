@@ -9,7 +9,7 @@ export default memoize(async (movie_id) => {
 	let $ = load(cont);
 
 	let title_visual = $('.visual-movie__title-name').text();
-	let title = title_visual.replace(/\ \(.*\)/, '').slice(0, -1);
+	let title = title_visual.replace(/ \(.*\)/, '').slice(0, -1);
 	let year = $('.movie-intro__release')
 		.text()
 		.replace('Release: ', '')
