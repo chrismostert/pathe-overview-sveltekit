@@ -8,7 +8,7 @@ const RT_ENV_PARAM = 'VITE_RT_LINK';
 
 export default memoize(async (movie_id) => {
 	if (import.meta.env[RT_ENV_PARAM] === undefined) {
-		throw new error(
+		throw new Error(
 			500,
 			`${RT_ENV_PARAM} has not been set as an environment variable. Rotten Tomatoes score lookup will not work without this link being set.`
 		);
