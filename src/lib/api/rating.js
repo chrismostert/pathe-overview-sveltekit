@@ -31,7 +31,7 @@ export default memoize(async (movie_id) => {
 			{
 				indexName: 'content_rt',
 				query: title_q,
-				params: 'filters=rtId%20%3E%200%20AND%20isEmsSearchable%20%3D%201&hitsPerPage=5'
+				params: 'filters=isEmsSearchable%20%3D%201&hitsPerPage=5'
 			}
 		]
 	};
