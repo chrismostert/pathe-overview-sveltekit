@@ -35,18 +35,20 @@
 	>
 		<div class="mt-2">
 			{#each movie.times as datetime}
-				<p class="font-medium">{datetime.day}</p>
-				<div class="flex flex-wrap">
-					{#each datetime.times as time}
-						<div
-							class="mr-1 mb-2 inline-block rounded-md px-1.5 text-center text-sm {get_color(
-								time.label
-							)}"
-						>
-							{time.start} – {time.end} ({time.label})
-						</div>
-					{/each}
-				</div>
+				{#if datetime.times.length > 0}
+					<p class="font-medium">{datetime.day}</p>
+					<div class="flex flex-wrap">
+						{#each datetime.times as time}
+							<div
+								class="mr-1 mb-2 inline-block rounded-md px-1.5 text-center text-sm {get_color(
+									time.label
+								)}"
+							>
+								{time.start} – {time.end} ({time.label})
+							</div>
+						{/each}
+					</div>
+				{/if}
 			{/each}
 		</div>
 	</div>
